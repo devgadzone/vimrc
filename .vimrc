@@ -3,7 +3,6 @@ let need_to_install_plugins = 0
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     let need_to_install_plugins = 1
 endif
 
@@ -13,7 +12,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'ap/vim-buftabline'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/The-NERD-tree'
+Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/syntastic'
@@ -21,6 +20,8 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
+Plug 'alvan/vim-closetag'
+Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 filetype plugin indent on
@@ -55,6 +56,9 @@ set softtabstop=4
 set colorcolumn=80
 set expandtab
 set viminfo='25,\"50,n~/.viminfo
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " word movement
 imap <S-Left> <Esc>bi
@@ -64,8 +68,10 @@ nmap <S-Right> w
 
 " indent/unindent with tab/shift-tab
 nmap <Tab> >>
-imap <S-Tab> <Esc><<i
 nmap <S-tab> <<
+imap <S-Tab> <Esc><<i
+vmap <Tab> >gv
+vmap <S-Tab> <gv
 
 " mouse
 set mouse=a
@@ -157,6 +163,13 @@ function NERDTreeToggle()
         wincmd p
     endif
 endfunction
+
+function! StartUp()
+    if 0 == argc()
+        NERDTree
+    end
+endfunction
+autocmd VimEnter * call StartUp()
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
