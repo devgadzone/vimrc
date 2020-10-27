@@ -15,8 +15,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'scrooloose/syntastic'
-Plug 'majutsushi/tagbar'
+Plug 'jiangmiao/auto-pairs'
+Plug 'dense-analysis/ale'
+Plug 'liuchengxu/vista.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
@@ -59,6 +60,9 @@ set viminfo='25,\"50,n~/.viminfo
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+" auto-pairs
+au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
 " word movement
 imap <S-Left> <Esc>bi
@@ -171,18 +175,12 @@ function! StartUp()
 endfunction
 autocmd VimEnter * call StartUp()
 
-" syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-map <leader>s :SyntasticCheck<CR>
-map <leader>d :SyntasticReset<CR>
-map <leader>e :lnext<CR>
-map <leader>r :lprev<CR>
+" ale
+map <C-e> <Plug>(ale_next_wrap)
+map <C-r> <Plug>(ale_previous_wrap)
 
-" tag list
-map <leader>t :TagbarToggle<CR>
+" tags
+map <leader>t :Vista!!<CR>
 
 " copy, cut and paste
 vmap <C-c> "+y
