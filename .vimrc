@@ -17,7 +17,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
 Plug 'dense-analysis/ale'
-Plug 'liuchengxu/vista.vim'
+Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
@@ -180,7 +180,7 @@ map <C-e> <Plug>(ale_next_wrap)
 map <C-r> <Plug>(ale_previous_wrap)
 
 " tags
-map <leader>t :Vista!!<CR>
+map <leader>t :TagbarToggle<CR>
 
 " copy, cut and paste
 vmap <C-c> "+y
